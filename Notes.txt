@@ -1,0 +1,5 @@
+<!--<div class="container-fluid mt-4">--><!--.container has one fixed width for each screen size in bootstrap (xs,sm,md,lg); .container-fluid expands to fill the available width.-->
+
+<!--<div class="row justify-content-center">--> <!--Use justify-content utilities on flexbox containers to change the alignment of flex items on the main axis -->
+
+<div class="col-auto mb-3"> <!--m - sets margin sets margin-bottom or padding-bottom 3 - sets margin or padding to 1rem (16px if font-size is 16px),Use col-{breakpoint}-auto classes to size columns based on the natural width of their content.-->
