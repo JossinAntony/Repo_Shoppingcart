@@ -209,6 +209,6 @@ app.get('/shoe-single/:id',(req,res)=>{
     res.render('shoe-single', {'shoe_single':shoes[i]});
 });
 
-app.listen( process.env.PORT || 3001, ()=>{
+app.listen(process.env.PORT || 3001, ()=>{
     console.log("Server running at http://localhost:3001");
 });
