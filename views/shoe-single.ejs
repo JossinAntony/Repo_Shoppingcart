@@ -34,7 +34,7 @@
     </nav>
 ---------------------------------------------------------- -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#"><h3><em>ShoeKart</em></h3></a>
+    <a class="navbar-brand" href="/"><h3><em>ShoeKart</em></h3></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -78,7 +78,7 @@
     <div class="row justify-content-center">
         
             <div class="col-auto mb-3"> 
-                <div class="card" style="width: 18rem; height: 26rem">
+                <div class="card">
                     <div class="card card-block d-flex" style="height: 250px; border: 0">
                         <div class="card-body align-items-center d-flex justify-content-center">
                             <img class="card-img-bottom " src = "<%= shoe_single.src %>" alt="Card image cap" style="width: 250px; height: 250 px; border:0;"/>
@@ -86,8 +86,31 @@
                     </div>
                     <div class="card-body">
                         <h5 class="card-title"><%= shoe_single.name %></h5>
-                        <h6 class="card-subtitle mb-2 text-muted"><%= shoe_single.price %></h6>
-                        <a href="#" class="btn btn-info">Buy now</a>
+                        <br>
+                        <h6 class="card-subtitle mb-2 text-muted">Price: <%= shoe_single.price %></h6>
+                        <table class="table-borderless">
+                          <tr>
+                            <td valign="top"><b>Description:</b></td><br>
+                            <td text-align="center"><%= shoe_single.description %></td>
+                          </tr>
+                        </table>
+                        <br><br>
+                        <table border="0" width="100%" ID="">
+                            <tr style="background-color:yellowgreen;color:white;">
+                              <td><h3><em><b>Customer Feedback</b></em></h3></td>
+                            </tr>
+                        </table>
+                        <table border="0" width="100%" ID="">
+                            <tr style="background-color:#f2f2f2;color:black;">
+                              <td><em><br>"<%= shoe_single.fb1 %>"</em></td>
+                            </tr>
+                            <tr style="background-color:#f2f2f2;color:black;">
+                                <td><em><br>"<%= shoe_single.fb2 %>"</em></td>
+                            </tr>
+                            <tr style="background-color:#f2f2f2;color:black;">
+                                <td><em><br>"<%= shoe_single.fb3 %>"</em></td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
