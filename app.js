@@ -200,6 +200,15 @@ app.get('/',(req,res)=>{
     res.render('index', {shoes});
 });
 
+app.get('/home',(req,res)=>{
+    res.render('index', {shoes});
+});
+
+app.get('/shoe-single/:id',(req,res)=>{
+    const i = req.params.id;
+    res.render('shoe-single', {'shoe_single':shoes[i]});
+});
+
 app.listen( process.env.PORT || 3001, ()=>{
     console.log("Server running at http://localhost:3001");
 });

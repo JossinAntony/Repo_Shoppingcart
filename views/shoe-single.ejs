@@ -14,7 +14,7 @@
     </script>
 
     </style>
-    <title>Shoekart</title>
+    <title>Shoe</title>
 </head>
 <body>
 <!-- ---------------------------------------------------------- -->
@@ -76,22 +76,22 @@
 <div class="container">
     <!--<div class="row">-->
     <div class="row justify-content-center">
-        <% for(var i = 0; i < shoes.length; i++){ %>
+        
             <div class="col-auto mb-3"> 
                 <div class="card" style="width: 18rem; height: 26rem">
                     <div class="card card-block d-flex" style="height: 250px; border: 0">
                         <div class="card-body align-items-center d-flex justify-content-center">
-                            <img class="card-img-bottom " src = "<%= shoes[i].src %>" alt="Card image cap" style="width: 250px; height: 250 px; border:0;"/>
+                            <img class="card-img-bottom " src = "<%= shoe_single.src %>" alt="Card image cap" style="width: 250px; height: 250 px; border:0;"/>
                         </div>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title"><%= shoes[i].name %></h5>
-                        <h6 class="card-subtitle mb-2 text-muted"><%= shoes[i].price %></h6>
-                        <a href="/shoe-single/<%= i %>" class="btn btn-info">Buy now</a>
+                        <h5 class="card-title"><%= shoe_single.name %></h5>
+                        <h6 class="card-subtitle mb-2 text-muted"><%= shoe_single.price %></h6>
+                        <a href="#" class="btn btn-info">Buy now</a>
                     </div>
                 </div>
             </div>
-        <% } %>
+        
     </div>
 </div>
 
