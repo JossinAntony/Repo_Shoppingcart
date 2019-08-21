@@ -1,8 +1,11 @@
 const Express = require('express');
+const bodyParser = require('body-parser');
+var Mongoose = require('mongoose');
 
 var app = new Express();
 app.set('view engine', 'ejs');
 app.use(Express.static(__dirname+"/public"));
+app.use(bodyParser.urlencoded({extended:true}));
 
 shoes=[
     {
@@ -212,7 +215,50 @@ app.get('/shoe-single/:id',(req,res)=>{
 app.get('/addshoes', (req,res)=>{
     res.render('addshoes');
 });
+////////////////////////////////////
+//API defintion & linking operations
+//1. import mongoose
 
+
+
+//2. Define databaseconnection
+//a. make sure to run mongodb server
+
+Mongoose.connect('mongodb://localhost:27017/ShoeDB');
+
+//3. Define dataschema (collection followed by dataschema)
+
+const shoeModel = Mongoose.model('shoes',{
+    uname:String,
+    uprice:String,
+    udes:String,
+    usrc:String,
+    ufb1:String,
+    ufb2:String,
+    ufb3:String
+} );
+
+//4. Define API to add item upon save from 'add item' page
+//a. import body-parser module
+//b. add bdy-parser urlencoded({extended:true} to obtain data from URL 
+app.post('/saveShoes',(req,res)=>{
+    var item = req.body;                        //get entered details
+    var shoe = new shoeModel(item);             //pass info into defined dataschema
+    shoe.save((error,data)=>{                    //save collection into database
+        if(error){                               //
+            throw error;
+        }else{
+            res.send("<script>alert('New item addedd into inventory!')</script>");
+            //console.log(data);
+            
+        }
+    });
+});
+//test api call with postman & robo 3t
+//make sure to 
+
+
+////////////////////////////////////
 const port = process.env.PORT || 8080;
 
 app.listen(port, ()=>{
