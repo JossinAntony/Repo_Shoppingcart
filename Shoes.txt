@@ -1,17 +1,8 @@
-const Express = require('express');
-const bodyParser = require('body-parser');
-var Mongoose = require('mongoose');
-var request = require('request');
-
-var app = new Express();
-app.set('view engine', 'ejs');
-app.use(Express.static(__dirname+"/public"));
-app.use(bodyParser.urlencoded({extended:true}));
 
 shoes=[
     {
-        'name':'ASIAN Shoes Wonder-13 Grey Firozi Mesh Shoes',
-        'price':'₹ 474.00 - ₹ 649.00 ',
+        'name':'Asian',
+        'price':'₹ 649.00 ',
         'description': 'Asian Shoes are for regular comfort wear. The body of this shoe is in a neutral grey colour with light blue accents. The upper material keeps air circulation while moderated ankles take full care of your feet when you go out for running.',
         'src':'/img/asian-wonder13.jpg',
         'fb1':'Very good quality at this price. Infact I am amazed to get the product at this price, really very good quality, durability, fitting very good.',
@@ -199,102 +190,3 @@ shoes=[
         'fb3':'Perfect size,perfect color,very good quality.'
     }
 ];
-
-app.get('/',(req,res)=>{
-    res.render('index', {shoes});
-});
-
-app.get('/home',(req,res)=>{
-    res.render('index', {shoes});
-});
-
-app.get('/shoe-single/:id',(req,res)=>{
-    const i = req.params.id;
-    res.render('shoe-single', {'shoe_single':shoes[i]});
-});
-
-app.get('/addshoes', (req,res)=>{
-    res.render('addshoes');
-});
-////////////////////////////////////
-//API defintion & linking operations
-//1. import mongoose
-
-
-
-//2. Define databaseconnection
-//a. make sure to run mongodb server
-
-Mongoose.connect('mongodb://localhost:27017/ShoeDB');
-
-//3. Define dataschema (collection followed by dataschema)
-
-const shoeModel = Mongoose.model('shoes',{
-    uname:String,
-    uprice:String,
-    udes:String,
-    usrc:String,
-    ufb1:String,
-    ufb2:String,
-    ufb3:String
-} );
-
-//4. Define API to add item upon save from 'add item' page
-//a. import body-parser module
-//b. add bdy-parser urlencoded({extended:true} to obtain data from URL 
-app.post('/saveShoes',(req,res)=>{
-    var item = req.body;                        //get entered details
-    var shoe = new shoeModel(item);             //pass info into defined dataschema
-    shoe.save((error,data)=>{                    //save collection into database
-        if(error){                               //
-            throw error;
-        }else{
-            res.send("<script>alert('New item addedd into inventory!')</script>");
-            //console.log(data);
-            
-        }
-    });
-});
-//test api call with postman & robo 3t
-//5. Define a retrieveAPI
-
-app.get('/getshoeAPI/:uname',(req,res)=>{
-    var shoe = req.params.uname;
-    shoeModel.find({uname:shoe},(error, data)=>{
-        if(error){
-            throw error;
-        }else{
-            res.send(data);
-        }
-    });
-});
-
-//6. create an API link
-
-var getshoeAPILink = "http://localhost:8080/getshoeAPI"
-
-//7. Define a function that calls the single shoess searchAPI
-//a. define request
-app.post('/searchShoes',(req,res)=>{
-    var shoe = req.body.sname;
-    console.log(getshoeAPILink+"/"+shoe);
-    request(getshoeAPILink+"/"+shoe,(error, response,body)=>{
-        if(error){
-            throw error;
-            send(error);
-        }else{
-            var data = JSON.parse(body);
-            //res.send({'data':data});
-            console.log(data)
-            res.render('view-shoe',{'data':data});
-        }
-    })
-});
-
-
-////////////////////////////////////
-const port = process.env.PORT || 8080;
-
-app.listen(port, ()=>{
-    console.log("Server running at http://localhost:8080");
-});

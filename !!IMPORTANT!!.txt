@@ -1,0 +1,1 @@
+image links are from localhost, change before deploying to heroku/ cloud atlas.
