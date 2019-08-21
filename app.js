@@ -1,6 +1,7 @@
 const Express = require('express');
 const bodyParser = require('body-parser');
 var Mongoose = require('mongoose');
+var request = require('request');
 
 var app = new Express();
 app.set('view engine', 'ejs');
@@ -255,7 +256,38 @@ app.post('/saveShoes',(req,res)=>{
     });
 });
 //test api call with postman & robo 3t
-//make sure to 
+//5. Define a retrieveAPI
+
+app.get('/getshoeAPI/:uname',(req,res)=>{
+    var shoe = req.params.uname;
+    shoeModel.find({uname:shoe},(error, data)=>{
+        if(error){
+            throw error;
+        }else{
+            res.send(data);
+        }
+    });
+});
+
+//6. create an API link
+
+var getshoeAPILink = "http://localhost:8080/getshoeAPI"
+
+//7. Define a function that calls the single shoess searchAPI
+//a. define request
+app.post('/searchShoes',(req,res)=>{
+    var shoe = req.body.sname;
+    console.log(getshoeAPILink+"/"+shoe);
+    request(getshoeAPILink+"/"+shoe,(error, response,body)=>{
+        if(error){
+            throw error;
+            send(error);
+        }else{
+            var data = JSON.parse(body);
+            res.send({'data':data});
+        }
+    })
+});
 
 
 ////////////////////////////////////
