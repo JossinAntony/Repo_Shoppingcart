@@ -209,6 +209,10 @@ app.get('/shoe-single/:id',(req,res)=>{
     res.render('shoe-single', {'shoe_single':shoes[i]});
 });
 
+app.get('/addshoes', (req,res)=>{
+    res.render('addshoes');
+});
+
 const port = process.env.PORT || 8080;
 
 app.listen(port, ()=>{
