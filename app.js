@@ -225,6 +225,7 @@ app.get('/addshoes', (req,res)=>{
 //2. Define databaseconnection
 //a. make sure to run mongodb server
 
+//change link to migrate to cloudatlas
 Mongoose.connect('mongodb://localhost:27017/ShoeDB');
 
 //3. Define dataschema (collection followed by dataschema)
@@ -243,14 +244,15 @@ const shoeModel = Mongoose.model('shoes',{
 //a. import body-parser module
 //b. add bdy-parser urlencoded({extended:true} to obtain data from URL 
 app.post('/saveShoes',(req,res)=>{
-    var item = req.body;                        //get entered details
+    var item = req.body;                        //get entered details (json object)
+    console.log(item);
     var shoe = new shoeModel(item);             //pass info into defined dataschema
     shoe.save((error,data)=>{                    //save collection into database
         if(error){                               //
             throw error;
         }else{
             res.send("<script>alert('New item addedd into inventory!')</script>");
-            //console.log(data);
+            console.log(data);
             
         }
     });
@@ -258,8 +260,9 @@ app.post('/saveShoes',(req,res)=>{
 //test api call with postman & robo 3t
 //5. Define a retrieveAPI
 
-app.get('/getshoeAPI/:uname',(req,res)=>{
-    var shoe = req.params.uname;
+app.get('/getshoeAPI',(req,res)=>{
+    //var shoe = req.params.uname;
+    var shoe = req.query.uname;
     shoeModel.find({uname:shoe},(error, data)=>{
         if(error){
             throw error;
